@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      post: 'Post'
+      comment: 'Comentário'
+    attributes:  # Corrigido de 'atributes' para 'attributes'
+      post: 
+        title: 'Título'
+        author: 'Autor'  # Corrigido 'Author' para 'Autor' para consistência com 'pt-BR'
+        body: 'Post'
+      comment:
+        author: 'Autor'  # Corrigido 'Author' para 'Autor'
+        body: 'Comentário'

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Blog" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+
+  <body>
+    <div class="bg-primary text-white text-center mb-4 p-4">
+      <%= link_to root_path, class:'text-white' do %>
+      <h1 class="display-4 text-decoration-none">Blog do Thiago Nascimento</h1>
+      <% end %>
+      <p class="lead">Olá, aqui você encontrará artigos sobre programação, tecnologia e carreira.</p>
+    </div>
+    <div class="container">
+      <%= yield %>
+    </div>
+
+    <footer class="bg-primary text-white text-center mt-5 p-4">Copyright Thiago Nascimento <%= Date.current.year %></footer>
+  </body>
+</html>
