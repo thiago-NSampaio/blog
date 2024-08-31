@@ -9,34 +9,51 @@
 
     <%= yield :head %>
 
-    <link rel="manifest" href="/manifest.json">
+    <%# <link rel="manifest" href="/manifest.json"> %>
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+    
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <div class="bg-primary text-white text-center mb-4 p-4">
-      <%= link_to root_path, class:'text-white text-decoration-none' do %>
-        <h1 class="display-4">Blog do Thiago Nascimento</h1>
+  <body class="d-flex flex-column min-vh-100">
+    <header class="bg-primary text-white text-center mb-4 p-4">
+      <%= link_to root_path, class: 'text-white text-decoration-none' do %>
+        <h1 class="display-4">Blog de TI</h1>
       <% end %>
       <p class="lead">Olá, aqui você encontrará artigos sobre programação, tecnologia e carreira.</p>
-    </div>
-    <div class="container">
-      <% flash.each do |type, message| %>
-        <div class="alert alert-<%= type == 'alert' ? 'danger' : 'success' %> alert-dismissible fade show" role="alert">
-          <%= message %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </header>
+    
+    <main class="flex-grow-1">
+      <div class="container">
+        <% flash.each do |type, message| %>
+          <div class="alert alert-<%= type == 'alert' ? 'danger' : 'success' %> alert-dismissible fade show" role="alert">
+            <%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+
+        <div class="row">
+          <div class="col-4 offset-8">
+            <div class="search">
+              <%= form_with url: search_posts_path, method: :get, local: true, class: 'd-inline-flex' do |form| %>
+                <div class="form-group mx-3 mb-3">
+                  <%= form.search_field :q, class: 'form-control', required: true, placeholder: 'Busca', value: params[:q] %>
+                </div>
+                <%= form.submit 'Buscar', class: 'btn btn-primary mb-3', data: { disable_with: 'Buscando...' } %>
+              <% end %>
+            </div>
+          </div>
         </div>
 
-      <% end %>
-      <%= yield %>
-    </div>
+        <%= yield %>
+      </div>
+    </main>
 
     <footer class="bg-primary text-white text-center mt-5 p-4">
-      Copyright Thiago Nascimento <%= Date.current.year %>
+      © Copyright Thiago Nascimento <%= Date.current.year %>
     </footer>
   </body>
 </html>
